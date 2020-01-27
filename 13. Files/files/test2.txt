@@ -1,0 +1,4 @@
+${value1}
+${value2}
+
+$${UNIXVAR} using more then one dollar sign escapes the variable notation so you can use UNIX/LINUX style variables that will not be poplatated by Terraform.

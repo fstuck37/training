@@ -1,13 +1,29 @@
-module "iterator" {
-  source       = "git::https://github.com/fstuck37/doubleiterator.git"
-  e1-size = 5
-  e2-size = 3
+variable x {
+  default = [0,1,2,3,4]
 }
 
-output "e1-list" {
-  value = module.iterator.e1-list
+variable y {
+  default = ["a","b","c"]
 }
 
-output "e2-list" {
-    value = module.iterator.e2-list
+locals {
+  double = flatten([
+    for x in var.x : [
+      for y in var.y : {
+        "x" = x
+        "y" = y
+    }]
+  ])
+}
+
+output "dub" {
+    value = local.double
+}
+
+output "dub-0-x" {
+    value = local.double[0]["x"]
+}
+
+output "dub-0-y" {
+    value = local.double[0]["y"]
 }

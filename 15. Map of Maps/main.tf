@@ -36,3 +36,16 @@ output "rendered" {
   value = data.template_file.tmpfile.rendered
 }
 
+data "template_file" "foreachtmpfile" {
+  for_each = var.tags
+  template = <<-EOF
+${each.key} ${each.value}
+  EOF
+}
+
+output "foreachtmpfile" {
+  value = [ for v in data.template_file.foreachtmpfile : v.rendered]
+}
+
+
+
